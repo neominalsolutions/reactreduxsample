@@ -6,19 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
 
+const client = new QueryClient();
+
 // Provider ile store daki state bilgisine herhangi bir yerden erişim sağlayabilirim.
 
 root.render(
 	// <React.StrictMode>
-  // <CounterProvider></CounterProvider>
+	// <CounterProvider></CounterProvider>
 	<Provider store={store}>
 		<BrowserRouter>
-			<App />
+			<QueryClientProvider client={client}>
+				<App />
+			</QueryClientProvider>
 		</BrowserRouter>
 	</Provider>
 	// </React.StrictMode>
