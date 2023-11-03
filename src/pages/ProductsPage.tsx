@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { QueryClient, useQuery } from 'react-query';
-import { fetchProduct, fetchProductById } from '../services/ProductApi';
+import { fetchProduct } from '../services/ProductApi';
 
 export interface Product {
 	ProductID: number;
@@ -15,19 +15,7 @@ function ProductsPage() {
 	// useEffect hook ile veri çekme ihtiyacınız ortadan kalkıyor
 	// component state ekrana bind etmek için useState de ihtiyaç yok;
 
-	const [productId, setProductId] = useState<number>(1);
-
 	const queryClient = new QueryClient();
-
-	const selectedProduct = useQuery({
-		queryKey: ['ProductsById', productId],
-		queryFn: async () => {
-			return fetchProductById(productId);
-		},
-		onSuccess: (data: Product) => {
-			console.log('seçilen-product', data);
-		},
-	});
 
 	const productResponse = useQuery({
 		queryKey: ['PRODUCTS'], // client state key, cache bozma işlemlerini bu key üzerinden yönetiriz
@@ -55,10 +43,6 @@ function ProductsPage() {
 	if (productResponse.data) {
 		return (
 			<>
-				Seçilen :{' '}
-				{selectedProduct?.data && (
-					<>{(selectedProduct.data as Product).ProductName}</>
-				)}
 				<hr></hr>
 				<button onClick={() => productResponse.refetch()}>
 					Manuel Refetch
@@ -72,14 +56,7 @@ function ProductsPage() {
 				</button>
 				<ul>
 					{productResponse.data.map((item: Product) => {
-						return (
-							<li key={item.ProductID}>
-								{item.ProductName}
-								<button onClick={() => setProductId(item.ProductID)}>
-									Seç
-								</button>
-							</li>
-						);
+						return <li key={item.ProductID}>{item.ProductName}</li>;
 					})}
 				</ul>
 			</>
