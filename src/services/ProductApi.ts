@@ -8,3 +8,11 @@ export const fetchProduct = async () => {
 		)
 		.then((response: any) => response.data.value);
 };
+
+export const fetchProductById = async (id: number) => {
+	return await axios
+		.get<Product>(
+			`https://services.odata.org/northwind/northwind.svc/Products?$filter=ProductID eq ${id}&$format=json`
+		)
+		.then((response: any) => response.data.value[0]);
+};
