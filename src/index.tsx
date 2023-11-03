@@ -8,6 +8,8 @@ import { store } from './store/store';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+// useState, useEffect, useLayoutEffect, useRef, useMemo, useCallBack, useReducer, useContext, useRoutes, useSelector, useDispatch, React Memo, useCustomHook, useForm, useQuery
+
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
