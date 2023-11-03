@@ -51,6 +51,10 @@ function TodosPage() {
 						<div key={item.id}>
 							{item.title}{' '}
 							<button onClick={() => onSelect(item)}>Seçim Yap</button>
+							<button onClick={() => {
+
+							}}>
+							</button>
 						</div>
 					);
 				})}
